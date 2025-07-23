@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff0f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        .pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        .heart {
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .photo-container {
+            transition: all 0.3s ease;
+        }
+        .photo-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+        .gallery-container {
+            scroll-behavior: smooth;
+        }
+        .message-paper {
+            background-image: 
+                linear-gradient(#fff9fb 1.5px, transparent 1.5px),
+                linear-gradient(90deg, #fff9fb 1.5px, transparent 1.5px);
+            background-size: 20px 20px;
+            background-color: #fff;
+        }
+        .follow-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            opacity: 0;
+        }
+        .follow-heart.active {
+            animation: pop-heart 1s forwards;
+        }
+        @keyframes pop-heart {
+            0% { transform: scale(0.5); opacity: 1; }
+            70% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0; top: -50px; }
+        }
+        .slide-in {
+            animation: slide-in 0.5s forwards;
+        }
+        @keyframes slide-in {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform: rotate(var(--rotation));
+        }
+        .love-note {
+            transform: rotate(var(--rotation));
+            transition: all 0.3s ease;
+        }
+        .love-note:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+        .slideshow {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .slideshow-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slideshow-item.active {
+            opacity: 1;
+        }
+        .reason-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .reason-card:hover {
+            transform: rotateY(10deg);
+        }
+        .theme-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        .theme-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+        .theme-option:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Heart that follows cursor -->
+    <div class="follow-heart">
+        <svg class="w-8 h-8 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+    </div>
+
+    <!-- Theme Selector -->
+    <div class="theme-selector flex flex-col">
+        <div class="theme-option bg-pink-400" data-primary="pink" data-secondary="purple" onclick="changeTheme('pink', 'purple')"></div>
+        <div class="theme-option bg-red-400" data-primary="red" data-secondary="pink" onclick="changeTheme('red', 'pink')"></div>
+        <div class="theme-option bg-purple-400" data-primary="purple" data-secondary="blue" onclick="changeTheme('purple', 'blue')"></div>
+        <div class="theme-option bg-blue-400" data-primary="blue" data-secondary="teal" onclick="changeTheme('blue', 'teal')"></div>
+    </div>
+
+    <!-- Special Button -->
+    <div class="fixed top-5 left-5 z-50">
+        <button id="specialBtn" class="bg-pink-500 hover:bg-pink-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition duration-300 transform hover:scale-110">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Header Section -->
+    <header class="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-pink-200 to-purple-100 opacity-80"></div>
+        
+        <!-- Floating Hearts -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <svg class="floating absolute top-1/4 left-1/4 text-pink-400 w-8 h-8" style="animation-delay: 0.5s" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <svg class="floating absolute top-1/3 right-1/4 text-red-400 w-6 h-6" style="animation-delay: 1s" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <svg class="floating absolute bottom-1/4 left-1/3 text-pink-300 w-10 h-10" style="animation-delay: 1.5s" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <svg class="floating absolute top-1/2 right-1/3 text-red-300 w-7 h-7" style="animation-delay: 2s" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+        
+        <div class="z-10 text-center px-4">
+            <h1 class="cursive text-5xl md:text-7xl font-bold text-pink-600 mb-4">Happy Birthday</h1>
+            <h2 class="cursive text-4xl md:text-6xl font-bold text-pink-500 mb-6">My Pookie 💖</h2>
+            <p class="text-lg md:text-xl text-pink-800 max-w-lg mx-auto">To the most amazing girlfriend in the world. You make every day special, but today is all about you!</p>
+            
+            <div class="mt-10">
+                <svg class="heart w-16 h-16 mx-auto text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+            
+            <button id="exploreBtn" class="mt-8 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                Explore Our Love Story
+            </button>
+        </div>
+    </header>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-16 px-4 bg-gradient-to-b from-purple-50 to-pink-100">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-12">Our Precious Memories</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               
+   <!-- Photo 1 -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[-2deg] flex flex-col items-center justify-between">
+    
+    <!-- Larger Image Area -->
+    <div class="w-full h-[230px] bg-pink-200 rounded-md overflow-hidden flex items-center justify-center">
+        <img src="New folder/assets/WhatsApp Image 2025-07-17 at 9.16.14 PM.jpeg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">Our First Date</h3>
+        <p class="text-gray-600 text-sm">March 22, 2025</p>
+    </div>
+</div>
+                
+                <!-- Photo 2: Stargazing Night -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[3deg] flex flex-col items-center justify-between">
+    
+    <!-- Icon Area Styled Like Image Box -->
+    <div class="w-full h-[230px] bg-purple-200 rounded-md flex items-center justify-center">
+         <img src="New folder/assets/114de7bb-c1e0-4bc1-a091-3028a04d73cf.jpg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">Starry Night</h3>
+        <p class="text-gray-600 text-sm">March 28, 2025</p>
+    </div>
+</div>
+                
+                <!-- Photo 3: Beach Day -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[-1deg] flex flex-col items-center justify-between">
+    
+    <!-- Icon Area (Heart) -->
+    <div class="w-full h-[230px] bg-red-100 rounded-md flex items-center justify-center">
+         <img src="New folder/assets/WhatsApp Image 2025-07-17 at 9.17.55 PM.jpeg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">First Eid Together</h3>
+        <p class="text-gray-600 text-sm">March 31, 2025</p>
+    </div>
+</div>
+                
+                <!-- Photo 4: Hiking Adventure -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[2deg] flex flex-col items-center justify-between">
+    <!-- Icon Area -->
+    <div class="w-full h-[230px] bg-blue-100 rounded-md flex items-center justify-center">
+        <img src="New folder/assets/WhatsApp Image 2025-07-17 at 9.18.57 PM.jpeg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">First Rain Night Together</h3>
+        <p class="text-gray-600 text-sm">April 16, 2025</p>
+    </div>
+</div>
+
+<!-- Photo 5: Concert Night -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[-3deg] flex flex-col items-center justify-between">
+    <!-- Icon Area -->
+    <div class="w-full h-[230px] bg-yellow-100 rounded-md flex items-center justify-center">
+        <img src="New folder/assets/WhatsApp Image 2025-07-18 at 6.50.26 AM.jpeg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">Concert Night</h3>
+        <p class="text-gray-600 text-sm">April 29, 2025</p>
+    </div>
+</div>
+
+<!-- Photo 6: Holiday Celebration -->
+<div class="polaroid bg-white rounded-lg shadow-lg w-[250px] h-[350px] p-4 rotate-[1deg] flex flex-col items-center justify-between">
+    <!-- Icon Area -->
+    <div class="w-full h-[230px] bg-green-100 rounded-md flex items-center justify-center">
+        <img src="New folder/assets/WhatsApp Image 2025-07-17 at 9.20.46 PM.jpeg" alt="Our First Date" class="w-full h-full object-cover">
+    </div>
+    <!-- Caption -->
+    <div class="text-center mt-4">
+        <h3 class="font-semibold text-lg text-pink-700">You Said 'YES'</h3>
+        <p class="text-gray-600 text-sm">May 19, 2025</p>
+    </div>
+</div>
+    </section>
+
+    <!-- Love Notes Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-pink-100 to-purple-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-12">Love Notes</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Note 1 -->
+                <div class="love-note bg-yellow-100 p-6 rounded-lg shadow-md" style="--rotation: -2deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">I love the way your eyes light up when you laugh.</p>
+                    <p class="text-right text-sm text-gray-600">- March 17</p>
+                </div>
+                
+                <!-- Note 2 -->
+                <div class="love-note bg-pink-100 p-6 rounded-lg shadow-md" style="--rotation: 1deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">You make even ordinary days feel magical.</p>
+                    <p class="text-right text-sm text-gray-600">- March 22</p>
+                </div>
+                
+                <!-- Note 3 -->
+                <div class="love-note bg-purple-100 p-6 rounded-lg shadow-md" style="--rotation: -1deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">Your smile is my favorite part of every day.</p>
+                    <p class="text-right text-sm text-gray-600">- April 13</p>
+                </div>
+                
+                <!-- Note 4 -->
+                <div class="love-note bg-blue-100 p-6 rounded-lg shadow-md" style="--rotation: 2deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">I fall in love with you a little more each day.</p>
+                    <p class="text-right text-sm text-gray-600">- April 3</p>
+                </div>
+                
+                <!-- Note 5 -->
+                <div class="love-note bg-green-100 p-6 rounded-lg shadow-md" style="--rotation: -3deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">You're my favorite person to do nothing with.</p>
+                    <p class="text-right text-sm text-gray-600">- May 3</p>
+                </div>
+                
+                <!-- Note 6 -->
+                <div class="love-note bg-red-100 p-6 rounded-lg shadow-md" style="--rotation: 3deg">
+                    <p class="cursive text-xl text-pink-700 mb-3">Being with you feels like home.</p>
+                    <p class="text-right text-sm text-gray-600">- June 23</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons I Love You Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-purple-50 to-pink-50">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-12">Reasons I Love You</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Reason 1 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-pink-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-pink-600 font-bold text-xl mb-4">1</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Kindness</h3>
+                        <p class="text-gray-600">The way you always think of others first and spread kindness wherever you go.</p>
+                    </div>
+                </div>
+                
+                <!-- Reason 2 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-purple-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold text-xl mb-4">2</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Laugh</h3>
+                        <p class="text-gray-600">It's the most beautiful sound in the world and instantly brightens my day.</p>
+                    </div>
+                </div>
+                
+                <!-- Reason 3 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-red-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-bold text-xl mb-4">3</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Support</h3>
+                        <p class="text-gray-600">You believe in me even when I don't believe in myself.</p>
+                    </div>
+                </div>
+                
+                <!-- Reason 4 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-blue-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl mb-4">4</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Creativity</h3>
+                        <p class="text-gray-600">The way you see the world differently and bring beauty into everything you do.</p>
+                    </div>
+                </div>
+                
+                <!-- Reason 5 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-green-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-xl mb-4">5</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Strength</h3>
+                        <p class="text-gray-600">How you face challenges with grace and never give up.</p>
+                    </div>
+                </div>
+                
+                <!-- Reason 6 -->
+                <div class="reason-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-12 bg-yellow-400"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 font-bold text-xl mb-4">6</div>
+                        <h3 class="font-semibold text-lg text-pink-700 mb-2">Your Heart</h3>
+                        <p class="text-gray-600">The way you love so deeply and completely.</p>
+                    </div>
+        </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="py-16 px-4 bg-gradient-to-b from-pink-50 to-purple-100">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-12">My Birthday Message to You</h2>
+            
+            <div class="message-paper p-8 md:p-12 rounded-lg shadow-lg transform rotate-1 relative">
+                <div class="absolute -top-4 -left-4 w-8 h-8 bg-pink-300 rounded-full shadow"></div>
+                <div class="absolute -bottom-4 -right-4 w-8 h-8 bg-pink-300 rounded-full shadow"></div>
+                
+                <div class="cursive text-2xl md:text-3xl text-pink-700 mb-6">My Dearest Pookie,</div>
+                
+                <div class="space-y-4 text-gray-700">
+                    <p>Happy Birthday to the most amazing person I've ever met! Today is all about celebrating you - your smile, your kindness, and all the love you bring into my life every single day.</p>
+                    
+                    <p>From the moment we met, you've made my world brighter and more beautiful. Every memory we've created together is precious to me, and I cherish each moment we spend together.</p>
+                    
+                    <p>You're my favorite person to laugh with, to dream with, and to share life's adventures with. Your heart is so full of love, and I'm the luckiest person alive because that love includes me.</p>
+                    
+                    <p>On your special day, I want you to know that you deserve all the happiness in the world. You're not just my girlfriend - you're my best friend, my confidant, and my heart's true home.</p>
+                    
+                    <p>I promise to keep making memories with you, to hold your hand through life's ups and downs, and to love you more deeply with each passing day.</p>
+                    
+                    <p>May this year bring you everything your heart desires and more!</p>
+                </div>
+                
+                <div class="mt-8 cursive text-2xl text-pink-700">
+                    <p>Forever yours,</p>
+                    <p>Your Loving Beb 💖</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memories Timeline -->
+    <section class="py-16 px-4 bg-gradient-to-b from-purple-100 to-pink-100">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-12">Our Love Timeline</h2>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-pink-300"></div>
+                
+                <!-- Timeline Events -->
+                <div class="space-y-12">
+                    <!-- Event 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0">
+                            <div class="bg-white p-5 rounded-lg shadow-md">
+                                <h3 class="text-xl font-semibold text-pink-600">The Day We Met</h3>
+                                <p class="text-gray-600 mt-2">I'll never forget how beautiful you looked and how my heart skipped a beat.</p>
+                                <p class="text-sm text-pink-500 mt-2">February 23, 2025</p>
+                            </div>
+                        </div>
+                        
+                        <div class="z-10 flex items-center justify-center w-10 h-10 bg-pink-500 rounded-full shadow-md">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="flex-1 md:pl-8 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- Event 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="flex-1 md:text-right md:pr-8 hidden md:block"></div>
+                        
+                        <div class="z-10 flex items-center justify-center w-10 h-10 bg-pink-500 rounded-full shadow-md">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="flex-1 md:pl-8 mb-4 md:mb-0">
+                            <div class="bg-white p-5 rounded-lg shadow-md">
+                                <h3 class="text-xl font-semibold text-pink-600">A Message That Changed Everything </h3>
+                                <p class="text-gray-600 mt-2">It all began with a simple thank you — not to each other, but to the one who unknowingly brought us together: our GED course faculty.We bonded over broken hearts, venting about our pasts and slowly stitching each other’s souls back together — one truth, one laugh, one late-night chat at a time </p>
+                                <p class="text-sm text-pink-500 mt-2"> March 16, 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0">
+                            <div class="bg-white p-5 rounded-lg shadow-md">
+                                <h3 class="text-xl font-semibold text-pink-600">Our First Kiss</h3>
+                                <p class="text-gray-600 mt-2">Inside that little photo booth, our lips met for the very first time a kiss so gentle, yet it shook my whole world. In that fleeting moment, I felt something deeper than butterflies... I felt home.</p>
+                                <p class="text-sm text-pink-500 mt-2">April 12, 2025</p>
+                            </div>
+                        </div>
+                        
+                        <div class="z-10 flex items-center justify-center w-10 h-10 bg-pink-500 rounded-full shadow-md">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="flex-1 md:pl-8 hidden md:block"></div>
+                    </div>
+                    
+                    <!-- Event 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="flex-1 md:text-right md:pr-8 hidden md:block"></div>
+                        
+                        <div class="z-10 flex items-center justify-center w-10 h-10 bg-pink-500 rounded-full shadow-md">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="flex-1 md:pl-8">
+                            <div class="bg-white p-5 rounded-lg shadow-md">
+                                <h3 class="text-xl font-semibold text-pink-600">First "I Love You"</h3>
+                                <p class="text-gray-600 mt-2">When you said it back, I felt like the luckiest person alive.</p>
+                                <p class="text-sm text-pink-500 mt-2">May 3, 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Event Button -->
+                    <div class="relative flex justify-center">
+                        <button id="addEventBtn" class="z-10 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
+                            Add New Memory
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Birthday Countdown -->
+    <section class="py-16 px-4 bg-gradient-to-b from-pink-100 to-pink-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="cursive text-4xl md:text-5xl text-center font-bold text-pink-600 mb-6">Birthday Countdown</h2>
+            <p class="text-lg text-pink-700 mb-10">Counting down to your special day!</p>
+            
+            <div id="countdown" class="flex flex-wrap justify-center gap-4">
+                <div class="bg-white rounded-lg shadow-md p-6 w-24">
+                    <div id="days" class="text-3xl font-bold text-pink-600">00</div>
+                    <div class="text-sm text-gray-600">Days</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 w-24">
+                    <div id="hours" class="text-3xl font-bold text-pink-600">00</div>
+                    <div class="text-sm text-gray-600">Hours</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 w-24">
+                    <div id="minutes" class="text-3xl font-bold text-pink-600">00</div>
+                    <div class="text-sm text-gray-600">Minutes</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 w-24">
+                    <div id="seconds" class="text-3xl font-bold text-pink-600">00</div>
+                    <div class="text-sm text-gray-600">Seconds</div>
+                </div>
+            </div>
+            
+            <div class="mt-10">
+                <button id="setBirthdayBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
+                    Set Birthday Date
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-pink-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="cursive text-3xl font-bold text-pink-600 mb-4">Forever & Always</h2>
+            <p class="text-pink-700">Made with 💖 for my pookie</p>
+        
+        <!-- Audio Element -->
+        <audio id="ourSong" src="New folder/assets/Full Video_ Tum Se Hi  Jab We Met  Kareena Kapoor, Shahid Kapoor  Mohit Chauhan  Pritam.mp3"></audio>
+            <div class="mt-6 flex justify-center space-x-4">
+                <button id="playMusicBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                    Our Song
+                </button>
+                
+                <button id="shareBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                    </svg>
+                    Share
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Adding Photos -->
+    <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Add New Photo</h3>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Photo Title</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Enter a title for this memory">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Date</label>
+                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Description</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" rows="3" placeholder="Write something about this memory"></textarea>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Upload Photo</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p class="mt-1 text-sm text-gray-600">Click to upload or drag and drop</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelPhotoBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="savePhotoBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Photo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Editing Message -->
+    <div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Edit Your Birthday Message</h3>
+            
+            <div class="mb-6">
+                <textarea id="messageText" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" rows="10">My Dearest Pookie,
+
+Happy Birthday to the most amazing person I've ever met! Today is all about celebrating you - your smile, your kindness, and all the love you bring into my life every single day.
+
+From the moment we met, you've made my world brighter and more beautiful. Every memory we've created together is precious to me, and I cherish each moment we spend together.
+
+You're my favorite person to laugh with, to dream with, and to share life's adventures with. Your heart is so full of love, and I'm the luckiest person alive because that love includes me.
+
+On your special day, I want you to know that you deserve all the happiness in the world. You're not just my girlfriend - you're my best friend, my confidant, and my heart's true home.
+
+I promise to keep making memories with you, to hold your hand through life's ups and downs, and to love you more deeply with each passing day.
+
+May this year bring you everything your heart desires and more!
+
+Forever yours,
+Your Loving Partner 💖</textarea>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelMessageBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="saveMessageBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Setting Birthday -->
+    <div id="birthdayModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Set Birthday Date</h3>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Birthday Date</label>
+                <input type="date" id="birthdayDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelBirthdayBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="saveBirthdayBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Date</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Timeline Event -->
+    <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Add New Memory</h3>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Memory Title</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Enter a title for this memory">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Date</label>
+                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Description</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" rows="3" placeholder="Write something about this memory"></textarea>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelEventBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="saveEventBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Memory</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Love Note -->
+    <div id="noteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Add Love Note</h3>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Your Note</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" rows="4" placeholder="Write a sweet message..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Date</label>
+                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Note Color</label>
+                <div class="flex space-x-2">
+                    <div class="w-8 h-8 bg-yellow-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="yellow"></div>
+                    <div class="w-8 h-8 bg-pink-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="pink"></div>
+                    <div class="w-8 h-8 bg-purple-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="purple"></div>
+                    <div class="w-8 h-8 bg-blue-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="blue"></div>
+                    <div class="w-8 h-8 bg-green-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="green"></div>
+                    <div class="w-8 h-8 bg-red-100 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="red"></div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelNoteBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="saveNoteBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Reason -->
+    <div id="reasonModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-pink-600 mb-4">Add New Reason</h3>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Reason Title</label>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Enter a title (e.g., Your Smile)">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Description</label>
+                <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" rows="3" placeholder="Explain why you love this about her..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Color</label>
+                <div class="flex space-x-2">
+                    <div class="w-8 h-8 bg-pink-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="pink"></div>
+                    <div class="w-8 h-8 bg-purple-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="purple"></div>
+                    <div class="w-8 h-8 bg-red-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="red"></div>
+                    <div class="w-8 h-8 bg-blue-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="blue"></div>
+                    <div class="w-8 h-8 bg-green-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="green"></div>
+                    <div class="w-8 h-8 bg-yellow-400 rounded-full cursor-pointer border-2 border-transparent hover:border-gray-400" data-color="yellow"></div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="cancelReasonBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancel</button>
+                <button id="saveReasonBtn" class="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600">Save Reason</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme colors
+        let primaryColor = 'pink';
+        let secondaryColor = 'purple';
+        
+        // Change theme colors
+        function changeTheme(primary, secondary) {
+            primaryColor = primary;
+            secondaryColor = secondary;
+            
+            // Update all primary color elements
+            document.querySelectorAll('[class*="bg-pink-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('bg-pink-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`bg-${primary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="text-pink-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('text-pink-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`text-${primary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="border-pink-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('border-pink-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`border-${primary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="ring-pink-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('ring-pink-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`ring-${primary}-${shade}`);
+                    }
+                });
+            });
+            
+            // Update all secondary color elements
+            document.querySelectorAll('[class*="bg-purple-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('bg-purple-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`bg-${secondary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="text-purple-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('text-purple-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`text-${secondary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="border-purple-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('border-purple-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`border-${secondary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="ring-purple-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('ring-purple-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`ring-${secondary}-${shade}`);
+                    }
+                });
+            });
+            
+            // Update gradients
+            document.querySelectorAll('[class*="from-pink-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('from-pink-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`from-${primary}-${shade}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('[class*="to-purple-"]').forEach(el => {
+                Array.from(el.classList).forEach(cls => {
+                    if (cls.startsWith('to-purple-')) {
+                        const shade = cls.split('-')[2];
+                        el.classList.remove(cls);
+                        el.classList.add(`to-${secondary}-${shade}`);
+                    }
+                });
+            });
+            
+            // Show confetti to celebrate the change
+            showConfetti();
+        }
+        
+        // Smooth scrolling for navigation
+        document.getElementById('exploreBtn').addEventListener('click', function() {
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Modal functionality
+        function setupModal(openBtnId, modalId, closeBtnId, saveBtnId) {
+            const openBtn = document.getElementById(openBtnId);
+            const modal = document.getElementById(modalId);
+            const closeBtn = document.getElementById(closeBtnId);
+            const saveBtn = document.getElementById(saveBtnId);
+            
+            if (!openBtn || !modal || !closeBtn || !saveBtn) return;
+            
+            openBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+            
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+            
+            saveBtn.addEventListener('click', () => {
+                // Here you would normally save the data
+                modal.classList.add('hidden');
+                showConfetti();
+            });
+        }
+        
+        // Setup all modals
+        setupModal('addPhotoBtn', 'photoModal', 'cancelPhotoBtn', 'savePhotoBtn');
+        setupModal('editMessageBtn', 'messageModal', 'cancelMessageBtn', 'saveMessageBtn');
+        setupModal('setBirthdayBtn', 'birthdayModal', 'cancelBirthdayBtn', 'saveBirthdayBtn');
+        setupModal('addEventBtn', 'eventModal', 'cancelEventBtn', 'saveEventBtn');
+        setupModal('addNoteBtn', 'noteModal', 'cancelNoteBtn', 'saveNoteBtn');
+        setupModal('addReasonBtn', 'reasonModal', 'cancelReasonBtn', 'saveReasonBtn');
+        
+        // Birthday countdown functionality
+        function updateCountdown() {
+            // Default to a future date if not set
+            let birthdayDate = localStorage.getItem('birthdayDate');
+            if (!birthdayDate) {
+                // Default to 30 days from now
+                const defaultDate = new Date();
+                defaultDate.setDate(defaultDate.getDate() + 30);
+                birthdayDate = defaultDate.toISOString().split('T')[0];
+            }
+            
+            const currentDate = new Date();
+            const targetDate = new Date(birthdayDate);
+            
+            // If the birthday has passed this year, set it for next year
+            if (targetDate < currentDate) {
+                targetDate.setFullYear(targetDate.getFullYear() + 1);
+            }
+            
+            const timeDifference = targetDate - currentDate;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+            // Update the countdown display
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Save birthday date
+        document.getElementById('saveBirthdayBtn').addEventListener('click', function() {
+            const birthdayDate = document.getElementById('birthdayDate').value;
+            if (birthdayDate) {
+                localStorage.setItem('birthdayDate', birthdayDate);
+                updateCountdown();
+            }
+        });
+        
+        // Confetti animation
+        function showConfetti() {
+            const colors = ['#ff69b4', '#ff1493', '#da70d6', '#ba55d3', '#9370db'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.opacity = '1';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
+                
+                // Animate falling
+                const animation = confetti.animate(
+                    [
+                        { transform: `translate(0, 0) rotate(${Math.random() * 360}deg)`, opacity: 1 },
+                        { transform: `translate(${Math.random() * 100 - 50}px, ${window.innerHeight}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    ],
+                    {
+                        duration: Math.random() * 3000 + 2000,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    }
+                );
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+        
+        // Share functionality
+        document.getElementById('shareBtn').addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Birthday Wishes for My Pookie',
+                    text: 'Check out this special birthday website I made for my girlfriend!',
+                    url: window.location.href
+                })
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                alert('Copy this link to share: ' + window.location.href);
+            }
+        });
+        
+        // Music button functionality (just visual, no actual audio)
+        document.getElementById('playMusicBtn').addEventListener('click', function() {
+            this.classList.toggle('bg-pink-600');
+            this.classList.toggle('bg-pink-500');
+            
+            if (this.innerHTML.includes('Our Song')) {
+                this.innerHTML = `
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+                    </svg>
+                    Pause Song
+                `;
+                showConfetti();
+            } else {
+                this.innerHTML = `
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                    Our Song
+                `;
+            }
+        });
+        
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slideshow-item');
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+        
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+        
+        // Auto-advance slideshow
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Floating heart that follows cursor
+        const followHeart = document.querySelector('.follow-heart');
+        let heartTimeout;
+        
+        document.addEventListener('mousemove', (e) => {
+            followHeart.style.left = (e.clientX - 16) + 'px';
+            followHeart.style.top = (e.clientY - 16) + 'px';
+        });
+        
+        document.addEventListener('click', () => {
+            const newHeart = followHeart.cloneNode(true);
+            newHeart.classList.add('active');
+            document.body.appendChild(newHeart);
+            
+            setTimeout(() => {
+                newHeart.remove();
+            }, 1000);
+        });
+        
+        // Special button functionality
+        document.getElementById('specialBtn').addEventListener('click', function() {
+            // Create a heart shower
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = `
+                        <svg class="w-${Math.floor(Math.random() * 8) + 4} h-${Math.floor(Math.random() * 8) + 4} text-${primaryColor}-${Math.floor(Math.random() * 3) + 4}00" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    `;
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '-50px';
+                    heart.style.zIndex = '9999';
+                    heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    heart.style.transition = 'all 3s ease';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.style.top = '120vh';
+                        heart.style.left = parseInt(heart.style.left) + (Math.random() * 200 - 100) + 'px';
+                    }, 100);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+            
+            // Show a special message
+            const message = document.createElement('div');
+            message.className = 'fixed inset-0 flex items-center justify-center z-[9999] pointer-events-none';
+            message.innerHTML = `
+                <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-xl text-center slide-in">
+                    <h2 class="cursive text-4xl text-${primaryColor}-600 mb-4">I Love You!</h2>
+                    <p class="text-${primaryColor}-700 text-xl">You're the best thing that ever happened to me ❤️</p>
+                </div>
+            `;
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'960da0e0d6a4771c',t:'MTc1Mjc5NjA4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
